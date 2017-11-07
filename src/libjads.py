@@ -34,7 +34,7 @@ def lookupDirectory(path):
                             isExtensionValida(extension)
                             getExtension(name)
 
-        Mode de uso: lookupDirectory('.\data')
+        Mode de uso: lookupDirectory('..\data')
 
         Retorna uma lista com todos os arquivos dentro deste diretorio.
     '''
