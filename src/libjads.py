@@ -3,59 +3,80 @@
 
 import os
 
-# ler extenção do arquivo.
-def getExtension(name):
-    ''' Le e retorna a estenção do arquivo recebido em (name).
+# Autoria e versao.
+class Jads(object):
+    ''' doc para Jads.
+        Usando:
+            a = libjads.Jads()
+            a.autor
+            a.ping
+            a.versao
     '''
-    fileName, fileExtension = os.path.splitext(name)
-    return fileExtension
+    def __init__(self, autor='Neviim Jads'):
+        super(Jads, self).__init__()
+        self.versao = '0.3'
+        self.autor = autor
+        self.ping = 'pong'
 
-# Valida se é uma extenção permitida.
-def isExtensionValida(extension):
-   ''' Valida se é uma extenção valida
-   '''
-   extensions = ['txt', 'dat', 'csv', 'xls']
-   for x in extensions:
-       if extension[:1] == '.':
-           if extension[1:].lower() == x:
+
+# Validando diretorio e arquivos.
+class Valida(object):
+    ''' doc para Valida.
+            parametro recebido:
+                path => caso o Parametro não seja enviado assume por defaut '../data'
+
+            Uso:
+                from libjads import Valida
+
+                path = '../data'
+                lista = Valida(path)
+                arquivos = lista.getArquivos()
+                print(arquivos)
+    '''
+    def __init__(self, path='../data'):
+        super(Valida, self).__init__()
+        self.path = path
+
+    def getExtensao(self, name):
+        ''' Le e retorna a estenção do arquivo recebido em (name).
+        '''
+        fileName, fileExtension = os.path.splitext(name)
+        return fileExtension
+
+    def isExtensaoValida(self, extension):
+       ''' Valida se é uma extenção valida
+       '''
+       extensions = ['txt', 'dat', 'csv', 'xls']
+       for x in extensions:
+           if extension[:1] == '.':
+               if extension[1:].lower() == x:
+                   return True
+           elif extension.lower() == x:
                return True
-       elif extension.lower() == x:
-           return True
-   return False
+       return False
 
-# lista o arquivo neste diretorio
-def lookupDirectory(path):
-    ''' Coloca em uma lista todos os arquivos com extenção valida.
+    def getArquivos(self):
+        ''' Coloca em uma lista todos os arquivos com extenção valida.
 
-        Depende da função:
-                            isExtensionValida(extension)
-                            getExtension(name)
+            Depende da função:
+                                isExtensaoValida(extension)
+                                getExtensao(name)
 
-        Mode de uso: lookupDirectory('..\data')
+            Mode de uso: getArquivos('..\data')
 
-        Retorna uma lista com todos os arquivos dentro deste diretorio.
-    '''
-    if os.path.isdir(path):
-        files = os.listdir(path)
-        lista = []
-        for i in files:
-            if i + '/' != 'windows/':
-                if os.path.isdir(path + i + '/'):
-                    lookupDirectory(path + i + '/')
-                if isExtensionValida(getExtension(i)) == True:
-                    lista.append(i)
-        return lista
+            Retorna uma lista com todos os arquivos dentro deste diretorio.
+        '''
+        if os.path.isdir(self.path):
+            files = os.listdir(self.path)
+            lista = []
+            for i in files:
+                if i + '/' != 'windows/':
+                    if os.path.isdir(self.path + i + '/'):
+                        getArquivos(self.path + i + '/')
+                    if self.isExtensaoValida(self.getExtensao(i)) == True:
+                        lista.append(i)
+            return lista
 
-# Autoria.
-class ping():
-    """docstring for ."""
-    #self.autor = "Neviim Jads"
-    def pong(self):
-        return("Neviim Jads")
-
-    def versao():
-        __version__ = "v 0.2"
-        return True
 
 # classe para abstrair campos da planilha.
 class Doador(object):
@@ -94,11 +115,6 @@ class Doador(object):
 
     def __str__(self):
         ''' Retornar um json com itens por linha. '''
-
-        lista = [dfdsfsdfsdfsdfdsfdsfsdf]
-        grava_mongo(lista)
-        return
-
         return("Campanha diaria, object:\n"
                "  id = {0}\n"
                "  data = {1}\n"
@@ -126,6 +142,6 @@ class Doador(object):
                        self.porcentagem_acumulado, self.dia_util))
 
 
-# Usando função: lookupDirectory(path)
+# Usando função: getArquivos(path)
 # if __name__ == '__main__':
-#    lookupDirectory('.\data')
+#    getArquivos('.\data')

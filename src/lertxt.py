@@ -4,25 +4,24 @@
 ''' Dependencias:
         $ pip install openpyxl
 '''
-
-__autor__   = "Neviim Jads"
-__version__ = "v 0.1"
-
 import io
-from libjads import lookupDirectory
-from openpyxl import load_workbook
+import libjads
+from libjads import Valida
 
 # função lista arquivos
-def listaArquivo(arquivos):
+def listaArquivo(path, arquivos):
     # Le e imprime todas as linhas do arquivo.
-    arquivo = io.open("../data/"+ lista[0], 'r', encoding="utf-8")
-    print(lista)
+    arquivo = io.open(path +'/'+ arquivos[0], 'r', encoding='utf-8')
     for linha in arquivo:
         print(linha)
     arquivo.close()
 
-# Usando esta função.
-lista = lookupDirectory('../data')
-listaArquivo(lista)
+# inicio...
+if __name__ == '__main__':
+    # Usando esta função.
+    path = '../data'
+    lista = libjads.Valida(path)
+    arquivos = lista.getArquivos()
+    print(arquivos)
 
-# Load in the workbook
+    listaArquivo(path, arquivos)

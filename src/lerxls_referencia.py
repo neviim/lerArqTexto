@@ -2,20 +2,19 @@
 # -*-coding: utf-8-*-
 
 __autor__   = "Neviim Jads"
-__version__ = "v 0.3"
+__version__ = "v 0.2"
 
 import io
 import pandas as pd
-from libjads import Valida, Doador
+from libjads import lookupDirectory, Doador
 
-# le os arquivos dentro do diretorio ../data ...
+# montando rotina ...
 path = '../data'
-lista = Valida(path)
-arquivos = lista.getArquivos()
+lista = lookupDirectory(path)
 #print(lista)
 
 # -- tem que arrumar isso para autolatico planilha especifica.
-arq_xls = pd.ExcelFile(path +'/'+ arquivos[1])
+arq_xls = pd.ExcelFile(path +'/'+ lista[1])
 aba_xls = arq_xls.sheet_names
 #print(aba_xls)
 
