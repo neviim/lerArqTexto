@@ -116,6 +116,35 @@ class Doador(object):
     def __str__(self):
         ''' Retornar um json com itens por linha.
         '''
+        return("Campanha diaria, object:\n"
+               "  id = {0}\n"
+               "  data = {1}\n"
+               "  boletos_Campanha = {2}\n"
+               "  debito_automatico = {3}\n"
+               "  depositos = {4}\n"
+               "  total_diario_clube_do_ouvinte = {5}\n"
+               "  porcentagem_dia_clube = {6}\n"
+               "  davi = {7}\n"
+               "  porcentagem_dia_davi = {8}\n"
+               "  aipf = {9}\n"
+               "  porcentagem_dia_aipf = {10}\n"
+               "  outros = {11}\n"
+               "  porcentagem_dia_outros = {12}\n"
+               "  total_geral_do_dia = {13}\n"
+               "  nan = {14}\n"
+               "  total_acumulado_recebido = {15}\n"
+               "  porcentagem_acumulado = {16}\n"
+               "  dia_util = {17}"
+               .format(self.id, self.data, self.boletos_Campanha, self.debito_automatico,
+                       self.depositos, self.total_diario_clube_do_ouvinte,
+                       self.porcentagem_dia_clube, self.davi, self.porcentagem_dia_davi,
+                       self.aipf, self.porcentagem_dia_aipf, self.outros, self.porcentagem_dia_outros,
+                       self.total_geral_do_dia, self.nan, self.total_acumulado_recebido,
+                       self.porcentagem_acumulado, self.dia_util))
+
+    def valor_dia(self):
+        ''' Retornar um json com itens por linha.
+        '''
         documento = "{'campanha_diaria': {\
         'id': '"+                           self.id+"',\
         'data': '"+                         self.data+"',\

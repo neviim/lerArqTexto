@@ -32,9 +32,11 @@ for i in range(0, len(df[df.columns[0]].dropna())):
         registro.append(df[df.columns[x]][i]) # passara por todos as colunas
 
     # processa registro por linha da planilha.
-    doador = yaml.load(str(Doador(*registro)))
+    doador = Doador(*registro)
+    #doador = yaml.load(str(Doador(*registro)))
+    #doador = yaml.load(str(Doador.valor_dia(*registro)))
     print(doador)
     print("...")
 
     #print(doador['campanha_diaria']['id'])
-    break
+    #break
